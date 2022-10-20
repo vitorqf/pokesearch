@@ -1,9 +1,11 @@
-import { Header } from "../Header";
+import { Header } from "../components/Header";
+import { Search } from "../components/Search";
 
 export default function Home() {
   return (
-    <div>
+    <div className="container">
       <Header />
+      <Search />
     </div>
   )
 }

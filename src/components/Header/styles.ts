@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import theme from '../styles/theme';
+import theme from '../../styles/theme';
 
 export const HeaderContainer = styled.header`
     width: 100%;
@@ -12,7 +12,7 @@ export const HeaderContainer = styled.header`
 `;
 
 export const NavContainer = styled.nav`
-    width: 50%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;

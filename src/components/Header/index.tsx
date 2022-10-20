@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from "../assets/logo.svg"
+import logo from "../../assets/logo.svg"
 import { HeaderContainer, NavContainer, LogoContainer } from './styles';
 
 export function Header() {
@@ -16,11 +16,9 @@ export function Header() {
           </Link>
         </LogoContainer>
         <ul>
-          <li className='expand'>item</li>
-          <li className='expand'>item</li>
-          <li className='expand'>item</li>
-          <li className='expand'>item</li>
-          <li className='expand'>item</li>
+          <li className='expand'>About</li>
+          <li className='expand'>Contribute</li>
+          <li className='expand'>Credits</li>
         </ul>
       </NavContainer>
     </HeaderContainer>

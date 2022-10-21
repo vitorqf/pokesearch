@@ -21,7 +21,7 @@ export function AboutMain() {
 
       <section>
         <h2>About me</h2>
-        <p>My name is Vitor! I'm a Front-end Developer. You can gather more info from me in my <a href="https://vitorrafael.com.br">portfolio</a>. I like doing this kind of project where I can study or get knowledge of a specific feature and revisit the already known by me.</p>
+        <p>My name is Vitor! I&apos;m a Front-end Developer. You can gather more info from me in my <a href="https://vitorrafael.com.br">portfolio</a>. I like doing this kind of project where I can study or get knowledge of a specific feature and revisit the already known by me.</p>
         <div>
           <a href="https://linkedin.com/in/vitor2806">
             <LinkedinLogo color='red' weight='bold' size={32}/>

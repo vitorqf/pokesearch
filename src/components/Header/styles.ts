@@ -31,7 +31,6 @@ export const NavContainer = styled.nav`
 
 export const LogoContainer = styled.section`
     > a {
-        color: ${({theme}) => theme.primary};
         display: flex;
         align-items: center;
         gap: 0.25rem;
@@ -39,6 +38,7 @@ export const LogoContainer = styled.section`
         font-size: 1.25rem;
 
         > span {
+            color: ${({theme}) => theme.primary};
             > span {
                 color: black;
             }

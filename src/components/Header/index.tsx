@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from "../../assets/logo.svg"
-import { HeaderContainer, NavContainer, LogoContainer } from './styles';
+
+import logo from '../../assets/logo.svg';
+import { HeaderContainer, LogoContainer, NavContainer } from './styles';
 
 export function Header() {
   return (

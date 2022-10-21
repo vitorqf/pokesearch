@@ -2,6 +2,8 @@ import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { InfiniteScroll } from 'react-infinite-scroll-comp';
+
 import { Search } from '../Search';
 import { Container, PokeListContainer, PokeListItem } from './styles';
 
@@ -10,17 +12,23 @@ interface Pokemon {
   url: string;
 }
 
-export function PokeList() {
-  const [pokeList, setPokeList] = useState<Pokemon[]>([])
+interface DataProps {
+  data: {
+    name: string;
+    url: string;
+  }[]
+}
+
+export function PokeList({data}: DataProps) {
+  const [pokeList, setPokeList] = useState<Pokemon[]>(data)
   const [search, setSearch] = useState('')
 
   const filteredList = search.length > 0 ? pokeList.filter(pokemon => pokemon.name.toLowerCase().includes(search.toLowerCase())) : [];
 
-  useEffect(() => {
-    axios.get("https://pokeapi.co/api/v2/pokemon?limit=100").then(res => setPokeList(res.data.results))
-  }, [])
-
-  console.log('Render')
+  async function getMorePoke() {
+    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=100&offset=${pokeList.length}`).then(res => setPokeList(pokes => [...pokes, ...res.data.results]))
+    
+  }
 
   return (
     <Container>
@@ -32,7 +40,7 @@ export function PokeList() {
               <Link href={`${pokemon.name}`} key={pokemon.name}>
                 <a>
                   <PokeListItem>
-                    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.url.split('/')[6]}.png`} alt={`${pokemon.name} icon`} width={100} height={100} />            
+                    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt={`${pokemon.name} icon`} width={80} height={80} />            
                     <span>{pokemon.name}</span>
                   </PokeListItem>
                 </a>
@@ -40,18 +48,31 @@ export function PokeList() {
             )
           })
         ) : (
-          pokeList.map((pokemon) => {
+          <InfiniteScroll
+            callBack={() => getMorePoke()}
+            containerStyle={{display: 'flex', flexFlow: 'row wrap', gap: '0.8rem', overflowY: 'unset'}}
+            useTopScroll={false}
+            dataLength={pokeList.length}   
+            next={getMorePoke}
+            hasMore={true}
+            loader={<h4>Loading...</h4>}
+            endMessage={
+              <p>You have finished!</p>
+            }
+          >
+            {pokeList?.map((pokemon) => {
             return (
               <Link href={`${pokemon.name}`} key={pokemon.name}>
                 <a>
                   <PokeListItem>
-                    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.url.split('/')[6]}.png`} alt={`${pokemon.name} icon`} width={100} height={100} />            
+                    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt={`${pokemon.name} icon`} width={80} height={80} />            
                     <span>{pokemon.name}</span>
                   </PokeListItem>
                 </a>
               </Link>
             )
-          })
+            })}
+          </InfiniteScroll>
         ) 
         }
       </PokeListContainer>

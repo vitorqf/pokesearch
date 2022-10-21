@@ -7,7 +7,8 @@ export default createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Press Start 2P', cursive;   
+        font-size: 0.9rem;
     }
 
     body,html {
@@ -62,6 +63,21 @@ export default createGlobalStyle`
             transform: scaleX(1);
             transform-origin:0 50%;
         }
+    }
+
+    .floating { 
+        animation-name: floating;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        margin-left: 30px;
+        margin-top: 5px;
+    }
+    
+    @keyframes floating {
+        0% { transform: translate(0,  0px); }
+        50%  { transform: translate(0, 15px); }
+        100%   { transform: translate(0, -0px); }   
     }
 
     .container {

@@ -27,9 +27,9 @@ export const PokeListItem = styled.div`
         width: 100%;
         text-align: center;
         text-transform: uppercase;
-        font-size: 0.85rem;
+        font-size: 0.65rem;
         font-weight: 600;
-        line-height: 2;
+        padding-block: 0.5rem;
         color: white;
         background-color: #00000075;
     }

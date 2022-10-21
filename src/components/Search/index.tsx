@@ -1,5 +1,6 @@
 import { MagnifyingGlass } from 'phosphor-react';
 import { useState } from 'react';
+
 import { Container, ContainerHeader, InputContainer } from './styles';
 
 interface SearchProps {

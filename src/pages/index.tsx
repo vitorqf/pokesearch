@@ -6,7 +6,6 @@ export default function Home() {
   return (
     <div className="container">
       <Header />
-      <Search />
       <PokeList />
     </div>
   )

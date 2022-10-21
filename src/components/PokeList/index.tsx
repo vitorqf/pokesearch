@@ -1,28 +1,60 @@
 import axios from 'axios';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Container, PokeListItem } from './styles';
+import { Search } from '../Search';
+import { Container, PokeListContainer, PokeListItem } from './styles';
+
+interface Pokemon {
+  name: string;
+  url: string;
+}
 
 export function PokeList() {
-  const [pokeList, setPokeList] = useState([])
-  const [isApiFetching, setIsApiFetching] = useState(false)
+  const [pokeList, setPokeList] = useState<Pokemon[]>([])
+  const [search, setSearch] = useState('')
+
+  const filteredList = search.length > 0 ? pokeList.filter(pokemon => pokemon.name.toLowerCase().includes(search.toLowerCase())) : [];
 
   useEffect(() => {
-    setIsApiFetching(true)
-    axios.get("https://pokeapi.co/api/v2/pokemon?limit=20").then(res => setPokeList(res.data.results))
-    setIsApiFetching(false)
+    axios.get("https://pokeapi.co/api/v2/pokemon?limit=100").then(res => setPokeList(res.data.results))
   }, [])
+
+  console.log('Render')
 
   return (
     <Container>
-      {pokeList.map((pokemon, index) => {
-        return (
-          <PokeListItem key={pokemon.name}>
-            <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/heartgold-soulsilver/${index+1}.png`} alt={`${pokemon.name} icon`} width={80} height={80}/>            
-            <span>{pokemon.name}</span>
-          </PokeListItem>
-        )
-      })}
+      <Search search={search} setSearch={setSearch}/>
+      <PokeListContainer>
+        {search.length > 0 ? (
+          filteredList.map((pokemon) => {
+            return (
+              <Link href={`${pokemon.name}`} key={pokemon.name}>
+                <a>
+                  <PokeListItem>
+                    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.url.split('/')[6]}.png`} alt={`${pokemon.name} icon`} width={100} height={100} />            
+                    <span>{pokemon.name}</span>
+                  </PokeListItem>
+                </a>
+              </Link>
+            )
+          })
+        ) : (
+          pokeList.map((pokemon) => {
+            return (
+              <Link href={`${pokemon.name}`} key={pokemon.name}>
+                <a>
+                  <PokeListItem>
+                    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/${pokemon.url.split('/')[6]}.png`} alt={`${pokemon.name} icon`} width={100} height={100} />            
+                    <span>{pokemon.name}</span>
+                  </PokeListItem>
+                </a>
+              </Link>
+            )
+          })
+        ) 
+        }
+      </PokeListContainer>
     </Container>
   );
 }

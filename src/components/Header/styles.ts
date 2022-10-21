@@ -21,10 +21,10 @@ export const NavContainer = styled.nav`
         display: flex;
         gap: 1rem;
 
-        > li {
+        a {
+            color: ${({theme}) => theme.primary};
             font-weight: 600;
             text-transform: uppercase;
-            cursor: pointer;
         }
     }
 `

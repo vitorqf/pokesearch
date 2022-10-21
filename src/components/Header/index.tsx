@@ -17,9 +17,16 @@ export function Header() {
           </Link>
         </LogoContainer>
         <ul>
-          <li className='expand'>About</li>
-          <li className='expand'>Contribute</li>
-          <li className='expand'>Credits</li>
+          <Link href="/about">
+            <a>
+              <li className='expand'>About</li>
+            </a>
+          </Link>
+          <Link href="/credits">
+            <a>
+              <li className='expand'>Credits</li>
+            </a>
+          </Link>
         </ul>
       </NavContainer>
     </HeaderContainer>

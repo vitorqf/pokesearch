@@ -20,14 +20,13 @@ interface DataProps {
 }
 
 export function PokeList({data}: DataProps) {
-  const [pokeList, setPokeList] = useState<Pokemon[]>(data)
+  const [pokeList, setPokeList] = useState<Pokemon[]>([])
   const [search, setSearch] = useState('')
 
-  const filteredList = search.length > 0 ? pokeList.filter(pokemon => pokemon.name.toLowerCase().includes(search.toLowerCase())) : [];
+  const filteredList = search.length > 0 ? data.filter(pokemon => pokemon.name.toLowerCase().includes(search.toLowerCase())) : [];
 
   async function getMorePoke() {
-    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=100&offset=${pokeList.length}`).then(res => setPokeList(pokes => [...pokes, ...res.data.results]))
-    
+    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=100&offset=${pokeList.length}`).then(res => setPokeList(pokes => [...pokes, ...res.data.results])) 
   }
 
   return (

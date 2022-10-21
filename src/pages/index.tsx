@@ -21,7 +21,7 @@ export default function Home({data}: HomeProps) {
 }
 
 export const getStaticProps = async () => {
-  const data = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=100&offset=0").then(res => res.data.results)
+  const data = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=10000000&offset=0").then(res => res.data.results)
 
   return {
     props: {

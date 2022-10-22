@@ -54,8 +54,4 @@ export const PokeListItem = styled.div`
     &:hover {
         scale: 105%;
     }
-
-    @media (max-width:700px) {
-        width: calc(50% - 0.8rem);
-    }
 `

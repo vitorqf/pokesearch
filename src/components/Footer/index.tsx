@@ -4,8 +4,8 @@ export function Footer() {
   return (
     <Container>
       <span>
-        Criado por
-        <a href="https://github.com/vitorqf/"> mim</a>
+        Created by
+        <a href="https://github.com/vitorqf/"> me</a>
       </span>
     </Container>
   );

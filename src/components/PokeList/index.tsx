@@ -26,7 +26,7 @@ export function PokeList({data}: DataProps) {
   const filteredList = search.length > 0 ? data.filter(pokemon => pokemon.name.toLowerCase().includes(search.toLowerCase())) : [];
 
   async function getMorePoke() {
-    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=100&offset=${pokeList.length}`).then(res => setPokeList(pokes => [...pokes, ...res.data.results])) 
+    await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=100&offset=${pokeList.length}`).then(res => setPokeList(pokes => [...pokes, ...res.data.results])) 
   }
 
   return (
@@ -49,12 +49,16 @@ export function PokeList({data}: DataProps) {
         ) : (
           <InfiniteScroll
             callBack={() => getMorePoke()}
-            containerStyle={{display: 'flex', flexFlow: 'row wrap', gap: '0.8rem', overflowY: 'unset'}}
+            containerStyle={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%/3, max(8rem, 100%/20)), 1fr))',
+              gap: '1rem',
+              overflowX: 'hidden'
+            }}
             useTopScroll={false}
             dataLength={pokeList.length}   
             next={getMorePoke}
-            hasMore={true}
-            loader={<h4>Loading...</h4>}
+            hasMore={data.length > pokeList.length}
             endMessage={
               <p>You have finished!</p>
             }

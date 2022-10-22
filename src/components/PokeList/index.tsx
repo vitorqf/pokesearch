@@ -36,7 +36,7 @@ export function PokeList({data}: DataProps) {
         {search.length > 0 ? (
           filteredList.map((pokemon) => {
             return (
-              <Link href={`${pokemon.name}`} key={pokemon.name}>
+              <Link href={`${pokemon.name}`} key={pokemon.name} passHref>
                 <a>
                   <PokeListItem>
                     <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt={`${pokemon.name} icon`} width={80} height={80} />            

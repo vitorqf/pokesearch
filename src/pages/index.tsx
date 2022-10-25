@@ -1,8 +1,9 @@
-import axios from "axios";
-import Head from "next/head";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-import { PokeList } from "../components/PokeList";
+import axios from 'axios';
+import Head from 'next/head';
+
+import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
+import { PokeList } from '../components/PokeList';
 
 interface HomeProps {
   data: {

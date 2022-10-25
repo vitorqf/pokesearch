@@ -1,4 +1,5 @@
 import Head from 'next/head';
+
 import { AboutMain } from '../components/AboutMain';
 import { Header } from '../components/Header';
 

@@ -7,7 +7,6 @@ import { InfiniteScroll } from 'react-infinite-scroll-comp';
 import { Search } from '../Search';
 import { Container, PokeListContainer, PokeListItem } from './styles';
 
-
 interface Pokemon {
   name: string;
   url: string;

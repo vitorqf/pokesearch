@@ -1,6 +1,7 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
+
 import { Header } from '../components/Header';
+import { Meta } from '../components/Meta';
 import { PokeInfo } from '../components/PokeInfo';
 
 export default function Pokemon() {
@@ -9,9 +10,7 @@ export default function Pokemon() {
 
     return (
         <div className='container'>
-            <Head>
-                <title>Pokemon Info</title>
-            </Head>
+            <Meta title='Pokemon Info' description='This is a page where is described pokemon info such as stats and type' keywords='pokemon pokedex pokeinfo'/>
             <Header />
             <PokeInfo pokemon={pokemon}/>
         </div>

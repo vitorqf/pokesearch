@@ -1,8 +1,8 @@
 import axios from 'axios';
-import Head from 'next/head';
 
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { Meta } from '../components/Meta';
 import { PokeList } from '../components/PokeList';
 
 interface HomeProps {
@@ -15,12 +15,7 @@ interface HomeProps {
 export default function Home({data}: HomeProps) {
   return (
     <div className="container">
-      <Head>
-        <title>PokéSearch</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="IE=7" />
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-      </Head>
+      <Meta title='About' description='This is a page where all pokemon are listed to be searched and get more info about them' keywords='pokemon pokedex pokeinfo'/>
       <Header />
       <PokeList data={data}/>
       <Footer />

@@ -53,4 +53,15 @@ export const PokeListItem = styled.div`
     &:hover {
         scale: 105%;
     }
-`
+`;
+
+export const Skeleton = styled.div`
+    min-width: 8.5rem;
+    min-height: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: ${({theme}) => lighten(0.025, theme.background)};
+`;

@@ -1,12 +1,12 @@
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InfiniteScroll } from 'react-infinite-scroll-comp';
 import ScrollToTop from 'react-scroll-to-top';
 
 import { Search } from '../Search';
-import { Container, PokeListContainer, PokeListItem } from './styles';
+import { Container, PokeListContainer, PokeListItem, Skeleton } from './styles';
 
 interface Pokemon {
   name: string;
@@ -23,6 +23,15 @@ interface DataProps {
 export function PokeList({data}: DataProps) {
   const [pokeList, setPokeList] = useState<Pokemon[]>([])
   const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (pokeList) {
+      setTimeout(() => {
+        setLoading(false)
+      }, 3000)
+    }
+  }, [pokeList])
 
   const filteredList = search.length > 0 ? data.filter(pokemon => pokemon.name.toLowerCase().includes(search.toLowerCase())) : [];
 
@@ -39,10 +48,16 @@ export function PokeList({data}: DataProps) {
             return (
               <Link href={`${pokemon.name}`} key={pokemon.name} passHref>
                 <a>
-                  <PokeListItem>
-                    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt={`${pokemon.name} icon`} width={80} height={80} />            
-                    <span>{pokemon.name}</span>
-                  </PokeListItem>
+                  {
+                    loading ?
+                    <Skeleton className='pulse' /> :
+                    (
+                      <PokeListItem>
+                        <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt={`${pokemon.name} icon`} width={80} height={80} />                                
+                        <span>{pokemon.name}</span>
+                      </PokeListItem>
+                    )
+                  }
                 </a>
               </Link>
             )
@@ -68,10 +83,17 @@ export function PokeList({data}: DataProps) {
             return (
               <Link href={`${pokemon.name}`} key={pokemon.name}>
                 <a>
-                  <PokeListItem>
-                    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt={`${pokemon.name} icon`} width={80} height={80} />            
-                    <span>{pokemon.name}</span>
-                  </PokeListItem>
+                  {
+                    loading ?
+                    <Skeleton className='pulse' /> :
+                    (
+                      <PokeListItem>
+                        <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt={`${pokemon.name} icon`} width={80} height={80} />                                
+                        <span>{pokemon.name}</span>
+                      </PokeListItem>
+                    )
+                  }
+                  
                 </a>
               </Link>
             )

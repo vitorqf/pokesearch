@@ -89,6 +89,26 @@ export default createGlobalStyle`
         100%   { transform: translate(0, -0px); }   
     }
 
+    .pulse {
+        $from: #f5f5f5;
+        $to: scale-color($from, $lightness: -10%);
+        
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(-90deg, #efefef 0%, #fcfcfc 50%, #efefef 100%);
+        background-size: 400% 400%;
+        animation: pulse 1.2s ease-in-out infinite;
+
+        @keyframes pulse {
+            0% {
+            background-position: 0% 0%
+            }
+            100% {
+            background-position: -135% 0%
+            }
+        }
+    }
+
     .container {
         width: 100%;
         margin: 0 auto;

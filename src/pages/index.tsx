@@ -15,7 +15,7 @@ interface HomeProps {
 export default function Home({data}: HomeProps) {
   return (
     <div className="container">
-      <Meta title='About' description='This is a page where all pokemon are listed to be searched and get more info about them' keywords='pokemon pokedex pokeinfo'/>
+      <Meta title='PokéSearch' description='This is a page where all pokémon are listed to be searched and get more info about them' keywords='pokemon pokémon pokedex pokeinfo'/>
       <Header />
       <PokeList data={data}/>
       <Footer />

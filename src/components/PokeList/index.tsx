@@ -1,8 +1,9 @@
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { InfiniteScroll } from 'react-infinite-scroll-comp';
+import ScrollToTop from 'react-scroll-to-top';
 
 import { Search } from '../Search';
 import { Container, PokeListContainer, PokeListItem } from './styles';
@@ -53,7 +54,7 @@ export function PokeList({data}: DataProps) {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%/3, max(8rem, 100%/20)), 1fr))',
               gap: '1rem',
-              overflowX: 'hidden'
+              overflow: 'hidden'
             }}
             useTopScroll={false}
             dataLength={pokeList.length}   
@@ -76,9 +77,10 @@ export function PokeList({data}: DataProps) {
             )
             })}
           </InfiniteScroll>
-        ) 
+          ) 
         }
       </PokeListContainer>
+      <ScrollToTop smooth width="20"/>
     </Container>
   );
 }

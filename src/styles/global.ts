@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import theme from './theme';
 
 export default createGlobalStyle`
+
     * {
         margin: 0;
         padding: 0;
@@ -13,6 +14,14 @@ export default createGlobalStyle`
 
     body,html {
         background: ${({ theme }) => theme.background};
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: ${({ theme }) => theme.primary};
+        }
     }
 
     img {

@@ -34,7 +34,6 @@ export const PokeHeader = styled.div`
         align-items: center;
         justify-content: center;
 
-        background-color: #03f8fc20;
         border-radius: 0.5rem;
 
         img {

@@ -19,6 +19,7 @@
     "react-infinite-scroll-comp": "^1.0.4",
     "react-loading-skeleton": "^3.1.0",
     "react-responsive-carousel": "^3.2.23",
+    "react-scroll-to-top": "^3.0.0",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {

@@ -61,7 +61,7 @@ export default createGlobalStyle`
         &:after {
             display:block;
             content: '';
-            border-bottom: solid 0.15rem ${({theme}) => theme.primary};  
+            border-bottom: solid 0.15rem ${({ theme }) => theme.primary};  
             transform: scaleX(0);  
             transition: transform 250ms ease-in-out;
             transform-origin:100% 50%

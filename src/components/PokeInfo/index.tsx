@@ -52,7 +52,6 @@ export function PokeInfo({pokemon}: PokeInfoProps) {
 
   useEffect(() => { pokemon && axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`).then(res => setData(res.data)) }, [pokemon])
   
-  console.log(data?.types)
   return (
     <Container>
       <PokeHeader>

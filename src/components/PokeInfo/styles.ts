@@ -4,6 +4,11 @@ interface TypeBadgeItem {
     type: string;
 }
 
+interface StatItem {
+    color: string;
+    size: number;
+}
+
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -22,15 +27,19 @@ export const PokeHeader = styled.div`
     border-radius: 0.75rem;
 
     > div:nth-of-type(1) {
-        flex: 1;
+        flex: 1 0;
         
         display: flex;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
 
-        padding-block: 5rem;
-
-        background-color: #ffffff95;
+        background-color: #03f8fc20;
         border-radius: 0.5rem;
+
+        img {
+            cursor: pointer;
+        }
     }
 
     > div:nth-of-type(2) {
@@ -71,4 +80,47 @@ export const TypeBadgeItem = styled.span<TypeBadgeItem>`
     padding: .35rem .5rem;
     
     border-radius: .25rem;
-`
+
+    margin-bottom: 1rem;
+`;
+
+export const StatusContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+`;
+
+export const StatItem = styled.div<StatItem>`
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    max-width: 255px;
+
+
+    > span {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+    }
+
+    > div {
+        
+        width: 255px;
+        background-color: #fff;
+        
+        margin-bottom: 1rem;
+        
+        border-radius: 0.35rem;
+        
+        overflow: hidden;
+        
+        > span {
+            font-size: 0.75rem;
+
+            display: block;
+            width: ${(props) => props.size + 'px'};
+
+            padding: 0.25rem 0.5rem;
+            background-color: ${(props) => props.theme.stats[props.color as keyof typeof props.theme.stats]};
+        }
+    }
+`;

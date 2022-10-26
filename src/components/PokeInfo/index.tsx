@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { Container, PokeHeader, TypeBadge, TypeBadgeItem } from './styles';
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+
+import { Container, PokeHeader, StatItem, StatusContainer, TypeBadge, TypeBadgeItem } from './styles';
 
 interface PokeInfoProps {
   pokemon: string | string[] | undefined;
@@ -33,10 +34,21 @@ interface DataProps {
     front_default: string;
     front_shiny: string;
   }
+  stats: [
+    {
+      base_stat: number;
+      effort: number;
+      stat: {
+        name: string;
+        url: string;
+      }
+    }
+  ]
 }
 
 export function PokeInfo({pokemon}: PokeInfoProps) {
   const [data, setData] = useState<DataProps>()
+  const [version, setVersion] = useState(true);
 
   useEffect(() => { pokemon && axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`).then(res => setData(res.data)) }, [pokemon])
   
@@ -45,8 +57,12 @@ export function PokeInfo({pokemon}: PokeInfoProps) {
     <Container>
       <PokeHeader>
         <div>
+        <span>{data?.sprites.front_shiny ? 'Click on pokemon to switch sprite!' : 'No shiny sprite available'}</span>
           <Image 
-            src={data?.sprites.front_default || ''} 
+            onClick={() => setVersion(!version)}
+            src={
+              (version ? data?.sprites.front_default : data?.sprites.front_shiny) || ''
+            } 
             alt={`${pokemon} image`} 
             width={240} 
             height={240} 
@@ -62,6 +78,19 @@ export function PokeInfo({pokemon}: PokeInfoProps) {
               )
             })}
           </TypeBadge>
+          <StatusContainer>
+            <h2>Base Stats</h2>
+            {data?.stats.map(stat => {
+              return (
+                <StatItem color={stat.stat.name} size={stat.base_stat} key={stat.stat.name}>
+                  <span>{stat.stat.name}</span>
+                  <div>
+                    <span>{stat.base_stat}</span>
+                  </div>
+                </StatItem>
+              )
+            })}
+          </StatusContainer>
         </div>
       </PokeHeader>
     </Container>

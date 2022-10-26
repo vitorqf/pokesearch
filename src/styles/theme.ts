@@ -23,6 +23,15 @@ const theme = {
       steel: '#B8B8D0',
       unknown: '#68A090',
       water: '#6890F0'
+    },
+
+    stats: {
+      hp: '#FC5957',
+      attack: '#F6AC7A',
+      defense: '#F9E179',
+      'special-attack': '#9DB8F5',
+      'special-defense': '#A6DB8E',
+      speed: '#F992B0',
     }
   };
   

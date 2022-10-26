@@ -37,7 +37,6 @@ export const PokeListItem = styled.div`
     gap: 0.5rem;
     border-radius: 0.5rem;
     background-color: ${({theme}) => lighten(0.025, theme.background)};
-    overflow: hidden;
 
     > span {
         width: 100%;
@@ -47,8 +46,8 @@ export const PokeListItem = styled.div`
         font-size: 0.65rem;
         font-weight: 600;
         padding-block: 0.5rem;
-        color: white;
-        background-color: #00000075;
+        color: black;
+        background-color: #fff;
     }
 
     &:hover {

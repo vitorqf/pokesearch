@@ -5,13 +5,20 @@ export const Container = styled.div``;
 
 export const ContainerHeader = styled.header`
   padding-block: 1rem;
+
+  display: flex;
+  justify-content: flex-start;
 `;
 export const InputContainer = styled.div`
+  max-width: 100%;
+
   display: flex;
   align-items: center;
+
   gap: 0.65rem;
-  padding: 0.25rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.35rem;
+  
   background-color: ${({ theme }) => lighten(0.025, theme.background)};
   transition: all 200ms ease-in-out;
 

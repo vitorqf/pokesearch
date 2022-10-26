@@ -12,13 +12,13 @@ export function Search({ search, setSearch }: SearchProps) {
     <Container>
       <ContainerHeader>
         <InputContainer>
-          <MagnifyingGlass size={32} />
           <input
             type='search'
             placeholder='Search...'
             onChange={e => setSearch(e.target.value)}
             value={search}
           />
+          <MagnifyingGlass size={28} color={"gray"} />
         </InputContainer>
       </ContainerHeader>
     </Container>

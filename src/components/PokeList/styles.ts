@@ -42,8 +42,12 @@ export const PokeListItem = styled.div`
   background-color: ${({ theme }) => lighten(0.025, theme.background)};
 
   > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.05rem;
+
     width: 100%;
-    text-align: center;
     text-transform: uppercase;
     line-height: 1.5;
     font-size: 0.65rem;

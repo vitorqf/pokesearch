@@ -27,7 +27,7 @@ export const PokeHeader = styled.div`
     border-radius: 0.75rem;
 
     > div:nth-of-type(1) {
-        flex: 1 0;
+        flex: 1;
         
         display: flex;
         flex-direction: column;
@@ -35,7 +35,7 @@ export const PokeHeader = styled.div`
         justify-content: center;
 
         border-radius: 0.5rem;
-
+        
         img {
             cursor: pointer;
         }
@@ -75,6 +75,7 @@ export const TypeBadge = styled.div`
 
 export const TypeBadgeItem = styled.span<TypeBadgeItem>`
     background-color: ${(props) => props.theme.badges[props.type as keyof typeof props.theme.badges]};
+    color: white;
 
     padding: .35rem .5rem;
     

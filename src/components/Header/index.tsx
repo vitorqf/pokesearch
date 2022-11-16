@@ -10,7 +10,6 @@ export function Header() {
       <NavContainer>
         <LogoContainer>
           <Link href='/'>
-            <a>
               <Image
                 src={logo}
                 alt='Site logo, which is a pokéball'
@@ -20,13 +19,10 @@ export function Header() {
               <span>
                 Poké<span>Search</span>
               </span>
-            </a>
           </Link>
         </LogoContainer>
         <Link href='/about'>
-          <a>
             <span className='expand'>About</span>
-          </a>
         </Link>
       </NavContainer>
     </HeaderContainer>

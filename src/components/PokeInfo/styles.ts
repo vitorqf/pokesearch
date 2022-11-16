@@ -36,7 +36,16 @@ export const PokeHeader = styled.div`
 
     border-radius: 0.5rem;
 
-    img {
+    > div {
+      height: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+    }
+
+    > div > img {
+      height: 100%;
       cursor: pointer;
     }
   }

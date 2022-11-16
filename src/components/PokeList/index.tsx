@@ -63,7 +63,6 @@ export function PokeList({ data }: DataProps) {
                 key={pokemon.name}
                 passHref
               >
-                <a>
                   {loading ? (
                     <Skeleton className='pulse' />
                   ) : (
@@ -79,7 +78,6 @@ export function PokeList({ data }: DataProps) {
                       <span>{pokemon.name}</span>
                     </PokeListItem>
                   )}
-                </a>
               </Link>
             );
           })
@@ -105,7 +103,6 @@ export function PokeList({ data }: DataProps) {
                   href={`${pokemon.name}`}
                   key={pokemon.name}
                 >
-                  <a>
                     {loading ? (
                       <Skeleton className='pulse' />
                     ) : (
@@ -115,13 +112,12 @@ export function PokeList({ data }: DataProps) {
                             pokemon.url.split('/')[6]
                           }.png`}
                           alt={`${pokemon.name} icon`}
-                          width={80}
-                          height={80}
+                          width={96}
+                          height={96}
                         />
                         <span>{pokemon.name}</span>
                       </PokeListItem>
                     )}
-                  </a>
                 </Link>
               );
             })}

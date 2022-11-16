@@ -1,16 +1,9 @@
 import axios from 'axios';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Footer } from '../Footer';
 
-import {
-  Container,
-  PokeHeader,
-  StatItem,
-  StatusContainer,
-  TypeBadge,
-  TypeBadgeItem,
-} from './styles';
+import { Footer } from '../Footer';
+import { Container, PokeHeader, StatItem, StatusContainer, TypeBadge, TypeBadgeItem } from './styles';
 
 interface PokeInfoProps {
   pokemon: string | string[] | undefined;
@@ -74,18 +67,21 @@ export function PokeInfo({ pokemon }: PokeInfoProps) {
               ? 'Click on pokemon to switch sprite!'
               : 'No shiny sprite available'}
           </span>
-          <Image
-            onClick={() => setVersion(!version)}
-            src={
-              (version
-                ? data?.sprites.front_default
-                : data?.sprites.front_shiny) || ''
-            }
-            alt={`${pokemon} image`}
-            width={200}
-            height={200}
-            className='floating'
-          />
+          <div>
+            <Image
+              onClick={() => setVersion(!version)}
+              src={
+                (version
+                  ? data?.sprites.front_default
+                  : data?.sprites.front_shiny) || ''
+              }
+              alt={`${pokemon} image`}
+              width={96}
+              height={96}
+              quality={100}
+              className='floating'
+            />
+          </div>
         </div>
         <div>
           <h1>{pokemon}</h1>

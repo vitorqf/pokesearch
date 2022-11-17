@@ -4,6 +4,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: ['raw.githubusercontent.com'],
+    minimumCacheTTL: 604800,
   },
 };
 

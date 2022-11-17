@@ -76,8 +76,8 @@ export function PokeInfo({ pokemon }: PokeInfoProps) {
                   : data?.sprites.front_shiny) || ''
               }
               alt={`${pokemon} image`}
-              width={96}
-              height={96}
+              width={240}
+              height={240}
               quality={100}
               className='floating'
             />

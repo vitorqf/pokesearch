@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 0.8rem;
   align-items: center;
+  letter-spacing: 2px;
 
   h2 {
     text-transform: uppercase;

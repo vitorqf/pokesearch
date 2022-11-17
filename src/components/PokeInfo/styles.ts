@@ -37,15 +37,14 @@ export const PokeHeader = styled.div`
     border-radius: 0.5rem;
 
     > div {
-      height: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      
+      padding: 2rem;
     }
 
     > div > img {
-      height: 100%;
+      margin: 0 auto;
       cursor: pointer;
     }
   }

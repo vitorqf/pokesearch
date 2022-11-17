@@ -18,7 +18,7 @@ export const PokeListContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(
       auto-fit,
-      minmax(min(100%/3, max(8.5rem, 100%/20)), 1fr)
+      minmax(min(100%/2, max(8.5rem, 100%/20)), 1fr)
     );
     gap: 1rem;
 
@@ -28,6 +28,11 @@ export const PokeListContainer = styled.div`
 
     > a {
       display: flex;
+      
+      > div {
+        flex: 1;
+        overflow: hidden;
+      }
     }
   }
 `;

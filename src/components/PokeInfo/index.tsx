@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import { Footer } from '../Footer';
+import { Loading } from '../Loading';
 import { Container, PokeHeader, StatItem, StatusContainer, TypeBadge, TypeBadgeItem } from './styles';
 
 interface PokeInfoProps {
@@ -50,38 +51,44 @@ interface DataProps {
 export function PokeInfo({ pokemon }: PokeInfoProps) {
   const [data, setData] = useState<DataProps>();
   const [version, setVersion] = useState(true);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     pokemon &&
       axios
         .get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-        .then(res => setData(res.data));
+        .then(res => setData(res.data))
+        .finally(() => setIsLoading(false))
   }, [pokemon]);
 
   return (
     <Container>
       <PokeHeader>
         <div>
-          <span>
-            {data?.sprites.front_shiny
-              ? 'Click on pokemon to switch sprite!'
-              : 'No shiny sprite available'}
-          </span>
-          <div>
-            <Image
-              onClick={() => setVersion(!version)}
-              src={
-                (version
-                  ? data?.sprites.front_default
-                  : data?.sprites.front_shiny) || ''
-              }
-              alt={`${pokemon} image`}
-              width={240}
-              height={240}
-              quality={100}
-              className='floating'
-            />
-          </div>
+          {isLoading ? <Loading /> :
+          <>
+            <span>
+              {data?.sprites.front_shiny
+                ? 'Click on pokemon to switch sprite!'
+                : 'No shiny sprite available'}
+            </span>
+              <div>
+                <Image
+                  onClick={() => setVersion(!version)}
+                  src={
+                    (version
+                      ? data?.sprites.front_default
+                      : data?.sprites.front_shiny) || ''
+                  }
+                  alt={`${pokemon} image`}
+                  width={240}
+                  height={240}
+                  quality={100}
+                  className='floating'
+                />
+              </div>
+          </>
+          }
         </div>
         <div>
           <h1>{pokemon}</h1>

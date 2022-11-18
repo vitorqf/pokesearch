@@ -8,24 +8,10 @@ export const Container = styled.div`
 
 export const PokeListContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%/3, max(8.5rem, 100%/20)), 1fr)
-  );
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
   gap: 1rem;
 
   > div {
-    display: grid;
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(min(100%/2, max(8.5rem, 100%/20)), 1fr)
-    );
-    gap: 1rem;
-
-    @media (min-width: 700px) {
-      justify-content: center;
-    }
-
     > a {
       display: flex;
       
@@ -38,28 +24,42 @@ export const PokeListContainer = styled.div`
 `;
 
 export const PokeListItem = styled.div`
-  min-width: 8.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  
+  overflow: hidden;
+
   gap: 0.5rem;
   border-radius: 0.5rem;
+
   background-color: ${({ theme }) => lighten(0.025, theme.background)};
 
+  > img {
+    width: 75%;
+  }
+
   > span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
+    text-align: center;
+
+    padding: 0.5rem;
     letter-spacing: 0.05rem;
 
-    width: 100%;
+    width: calc(100%);
     text-transform: uppercase;
     line-height: 1.5;
     font-size: 0.65rem;
     font-weight: 600;
+
     padding-block: 0.5rem;
+    
     color: black;
     background-color: #fff;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &:hover {

@@ -23,6 +23,7 @@ export const InputContainer = styled.div`
   transition: all 200ms ease-in-out;
 
   > input {
+    width: 100%;
     font-size: 1rem;
     outline: none;
     background-color: transparent;
@@ -41,5 +42,9 @@ export const InputContainer = styled.div`
     > input::placeholder {
       opacity: 0;
     }
+  }
+
+  @media (max-width: 1000px) {
+    width: 100%;
   }
 `;

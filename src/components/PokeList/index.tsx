@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { InfiniteScroll } from 'react-infinite-scroll-comp';
 import ScrollToTop from 'react-scroll-to-top';
 
+import { Loading } from '../Loading';
 import { Search } from '../Search';
 import { Container, PokeListContainer, PokeListItem, Skeleton } from './styles';
 
@@ -18,6 +19,18 @@ interface DataProps {
     name: string;
     url: string;
   }[];
+}
+
+const InfiniteScrollStyle = {
+  overflow: 'hidden',
+  width: '100%',
+
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(8.5rem, 1fr))',
+
+  alignItems: 'center',
+
+  gap: '1rem'
 }
 
 export function PokeList({ data }: DataProps) {
@@ -54,14 +67,15 @@ export function PokeList({ data }: DataProps) {
         search={search}
         setSearch={setSearch}
       />
-      <PokeListContainer>
         {search.length > 0 ? (
-          filteredList.map(pokemon => {
+        <PokeListContainer>
+
+          {filteredList.map(pokemon => {
             return (
               <Link
+                title={pokemon.name}
                 href={`${pokemon.name}`}
                 key={pokemon.name}
-                passHref
               >
                   {loading ? (
                     <Skeleton className='pulse' />
@@ -80,50 +94,46 @@ export function PokeList({ data }: DataProps) {
                   )}
               </Link>
             );
-          })
+          })}
+        </PokeListContainer>
         ) : (
-          <InfiniteScroll
+        <InfiniteScroll
             callBack={() => getMorePoke()}
-            containerStyle={{
-              display: 'grid',
-              gridTemplateColumns:
-                'repeat(auto-fit, minmax(min(100%/3, max(8rem, 100%/20)), 1fr))',
-              gap: '1rem',
-              overflow: 'hidden',
-            }}
+            containerStyle={InfiniteScrollStyle}
             useTopScroll={false}
             dataLength={pokeList.length}
             next={getMorePoke}
             hasMore={data.length > pokeList.length}
             endMessage={<p>You have finished!</p>}
-          >
-            {pokeList?.map(pokemon => {
-              return (
-                <Link
-                  href={`${pokemon.name}`}
-                  key={pokemon.name}
-                >
-                    {loading ? (
-                      <Skeleton className='pulse' />
-                    ) : (
-                      <PokeListItem>
-                        <Image
-                          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                            pokemon.url.split('/')[6]
-                          }.png`}
-                          alt={`${pokemon.name} icon`}
-                          width={96}
-                          height={96}
-                        />
-                        <span>{pokemon.name}</span>
-                      </PokeListItem>
-                    )}
-                </Link>
-              );
-            })}
-          </InfiniteScroll>
+            Loader={<Loading />}
+        >
+          {pokeList?.map(pokemon => {
+            return (
+              <Link
+                href={`${pokemon.name}`}
+                key={pokemon.name}
+              >
+                  {loading ? (
+                    <Skeleton className='pulse' />
+                  ) : (
+                    <PokeListItem>
+                      <Image
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                          pokemon.url.split('/')[6]
+                        }.png`}
+                        alt={`${pokemon.name} icon`}
+                        width={96}
+                        height={96}
+                      />
+                      <span>{pokemon.name}</span>
+                    </PokeListItem>
+                  )}
+              </Link>
+            );
+          })}
+        </InfiniteScroll>
         )}
-      </PokeListContainer>
+      {/* </PokeListContainer> */}
       <ScrollToTop
         smooth
         width='20'

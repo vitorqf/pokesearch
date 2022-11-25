@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import logo from '../../assets/logo.svg';
 import { HeaderContainer, LogoContainer, NavContainer } from './styles';
 
 export function Header() {
@@ -11,7 +10,7 @@ export function Header() {
         <LogoContainer>
           <Link href='/'>
               <Image
-                src={logo}
+                src='/logo.svg'
                 alt='Site logo, which is a pokéball'
                 width={36}
                 height={36}

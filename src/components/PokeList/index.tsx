@@ -1,24 +1,17 @@
-import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { InfiniteScroll } from 'react-infinite-scroll-comp';
 import ScrollToTop from 'react-scroll-to-top';
 
+import { queryProps } from '../../pages';
 import { Loading } from '../Loading';
 import { Search } from '../Search';
-import { Container, PokeListContainer, PokeListItem, Skeleton } from './styles';
+import { Container, PokeListContainer, PokeListItem } from './styles';
 
 interface Pokemon {
   name: string;
   url: string;
-}
-
-interface DataProps {
-  data: {
-    name: string;
-    url: string;
-  }[];
 }
 
 const InfiniteScrollStyle = {
@@ -33,33 +26,32 @@ const InfiniteScrollStyle = {
   gap: '1rem'
 }
 
-export function PokeList({ data }: DataProps) {
+export function PokeList({ data }: queryProps) {
+
   const [pokeList, setPokeList] = useState<Pokemon[]>([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (pokeList) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 3000);
-    }
-  }, [pokeList]);
-
   const filteredList =
     search.length > 0
-      ? data.filter(pokemon =>
+      ? data.results.filter(pokemon =>
           pokemon.name.toLowerCase().includes(search.toLowerCase())
         )
       : [];
-
+      
   async function getMorePoke() {
-    await axios
-      .get(
-        `https://pokeapi.co/api/v2/pokemon?limit=100&offset=${pokeList.length}`
-      )
-      .then(res => setPokeList(pokes => [...pokes, ...res.data.results]));
+    const pos = pokeList.length
+    const res = data.results.slice(pos, pos + 100)
+
+    setPokeList(poke => [...poke, ...res])
   }
+
+  useEffect(() => {
+    const init = data.results.slice(0, 100)
+    setPokeList(init)
+    setLoading(false)
+  }, [data.results])
+
 
   return (
     <Container>
@@ -78,7 +70,7 @@ export function PokeList({ data }: DataProps) {
                 key={pokemon.name}
               >
                   {loading ? (
-                    <Skeleton className='pulse' />
+                    <Loading />
                   ) : (
                     <PokeListItem>
                       <Image
@@ -103,7 +95,7 @@ export function PokeList({ data }: DataProps) {
             useTopScroll={false}
             dataLength={pokeList.length}
             next={getMorePoke}
-            hasMore={data.length > pokeList.length}
+            hasMore={data.count > pokeList.length}
             endMessage={<p>You have finished!</p>}
             Loader={<Loading />}
         >
@@ -114,7 +106,7 @@ export function PokeList({ data }: DataProps) {
                 key={pokemon.name}
               >
                   {loading ? (
-                    <Skeleton className='pulse' />
+                    <Loading />
                   ) : (
                     <PokeListItem>
                       <Image

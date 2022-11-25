@@ -5,14 +5,22 @@ import { Header } from '../components/Header';
 import { Meta } from '../components/Meta';
 import { PokeList } from '../components/PokeList';
 
-interface HomeProps {
+export interface queryProps {
   data: {
-    name: string;
-    url: string;
-  }[];
+    count: number;
+    next: string;
+    previous: string;
+    results: [
+      {
+        name: string;
+        url: string;
+      }
+    ]
+  }
 }
 
-export default function Home({ data }: HomeProps) {
+
+export default function Home(props: queryProps) {
   return (
     <div className='container'>
       <Meta
@@ -21,16 +29,16 @@ export default function Home({ data }: HomeProps) {
         keywords='pokemon pokémon pokedex pokeinfo'
       />
       <Header />
-      <PokeList data={data} />
+      <PokeList data={props.data} />
       <Footer />
     </div>
   );
 }
 
 export const getStaticProps = async () => {
-  const data = await axios
-    .get('https://pokeapi.co/api/v2/pokemon?limit=10000000&offset=0')
-    .then(res => res.data.results);
+  const data: queryProps = await axios
+    .get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
+    .then(res => res.data);
 
   return {
     props: {

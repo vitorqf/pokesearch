@@ -14,6 +14,8 @@ export const NavContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+
 
   a:nth-child(2) {
     color: ${({ theme }) => theme.primary};

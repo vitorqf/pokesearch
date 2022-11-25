@@ -22,7 +22,7 @@ export function Meta({ title, keywords, description }: MetaProps) {
         content={description}
       />
       <meta
-        http-equiv='Content-Type'
+        httpEquiv='Content-Type'
         content='text/html;charset=UTF-8'
       />
       <title>{title}</title>

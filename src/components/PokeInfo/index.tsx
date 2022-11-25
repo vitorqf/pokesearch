@@ -85,6 +85,7 @@ export function PokeInfo({ pokemon }: PokeInfoProps) {
                   height={240}
                   quality={100}
                   className='floating'
+                  priority={true}
                 />
               </div>
           </>

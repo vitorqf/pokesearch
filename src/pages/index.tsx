@@ -3,10 +3,10 @@ import axios from 'axios';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Meta } from '../components/Meta';
+import { Pod } from '../components/Pod';
 import { PokeList } from '../components/PokeList';
 
 export interface queryProps {
-  data: {
     count: number;
     next: string;
     previous: string;
@@ -16,11 +16,14 @@ export interface queryProps {
         url: string;
       }
     ]
-  }
 }
 
+interface HomeProps {
+  data: queryProps;
+  pod: number;
+}
 
-export default function Home(props: queryProps) {
+export default function Home({data, pod}: HomeProps) {
   return (
     <div className='container'>
       <Meta
@@ -29,7 +32,8 @@ export default function Home(props: queryProps) {
         keywords='pokemon pokémon pokedex pokeinfo'
       />
       <Header />
-      <PokeList data={props.data} />
+      <Pod name={data.results[pod].name} url={data.results[pod].url} />
+      <PokeList data={data} />
       <Footer />
     </div>
   );
@@ -38,11 +42,12 @@ export default function Home(props: queryProps) {
 export const getStaticProps = async () => {
   const data: queryProps = await axios
     .get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
-    .then(res => res.data);
+    .then(res => res.data)
 
   return {
     props: {
       data,
+      pod: Math.floor(Math.random() * 1154)
     },
     revalidate: 604800,
   };

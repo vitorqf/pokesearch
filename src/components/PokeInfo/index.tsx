@@ -10,7 +10,7 @@ interface PokeInfoProps {
   pokemon: string | string[] | undefined;
 }
 
-interface DataProps {
+export interface DataProps {
   abilities: [
     {
       ability: {

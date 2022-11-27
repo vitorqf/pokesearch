@@ -14,6 +14,11 @@ interface Pokemon {
   url: string;
 }
 
+
+interface PokeListProps {
+  data: queryProps
+}
+
 const InfiniteScrollStyle = {
   overflow: 'hidden',
   width: '100%',
@@ -26,12 +31,13 @@ const InfiniteScrollStyle = {
   gap: '1rem'
 }
 
-export function PokeList({ data }: queryProps) {
+export function PokeList({ data }: PokeListProps) {
 
   const [pokeList, setPokeList] = useState<Pokemon[]>([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
 
+  // Search the pokemon name into SSR data
   const filteredList =
     search.length > 0
       ? data.results.filter(pokemon =>
@@ -39,6 +45,9 @@ export function PokeList({ data }: queryProps) {
         )
       : [];
       
+  // POS takes the last index of pokeList
+  // RES fetches data from SSR from POS to POS + 100
+  // then sets poke list to already existing ones and fetched ones
   async function getMorePoke() {
     const pos = pokeList.length
     const res = data.results.slice(pos, pos + 100)
@@ -124,8 +133,7 @@ export function PokeList({ data }: queryProps) {
             );
           })}
         </InfiniteScroll>
-        )}
-      {/* </PokeListContainer> */}
+      )}
       <ScrollToTop
         smooth
         width='20'

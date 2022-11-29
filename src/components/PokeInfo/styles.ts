@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-interface TypeBadgeItem {
+export interface TypeBadgeItem {
   type: string;
 }
 
-interface StatItem {
+export interface StatItem {
   color: string;
   size: number;
 }
@@ -85,6 +85,8 @@ export const TypeBadgeItem = styled.span<TypeBadgeItem>`
   background-color: ${props =>
     props.theme.badges[props.type as keyof typeof props.theme.badges]};
   color: white;
+
+  text-align: center;
 
   padding: 0.35rem 0.5rem;
 

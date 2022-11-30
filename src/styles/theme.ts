@@ -8,7 +8,7 @@ const theme = {
     dragon: '#7038f8',
     electric: '#f4cd30',
     fairy: '#F8A0E0',
-    fight: '#903028',
+    fighting: '#903028',
     fire: '#F05030',
     flying: '#A890F0',
     ghost: '#705898',

@@ -46,6 +46,8 @@ export interface DataProps {
       };
     }
   ];
+  weight: number;
+  height: number;
 }
 
 export function PokeInfo({ pokemon }: PokeInfoProps) {

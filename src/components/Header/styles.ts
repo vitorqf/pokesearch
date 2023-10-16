@@ -16,7 +16,6 @@ export const NavContainer = styled.nav`
   justify-content: space-between;
   flex-wrap: wrap;
 
-
   a:nth-child(2) {
     color: ${({ theme }) => theme.primary};
     font-weight: 600;
@@ -35,7 +34,7 @@ export const LogoContainer = styled.section`
     > span {
       color: ${({ theme }) => theme.primary};
       > span {
-        color: black;
+        color: #000;
       }
     }
   }

@@ -41,7 +41,7 @@ export const WeekPokeInfo = styled.div<TypeBadgeItem>`
 
     &:hover {
       opacity: 0.75;
-      color: black;
+      color: #000;
     }
   }
 `;

@@ -5,7 +5,7 @@ export function Footer() {
     <Container>
       <span>
         Created by
-        <a href='https://github.com/vitorqf/'> me</a>
+        <a href='https://www.vitorrafael.com.br/'> me ❤️</a>
       </span>
     </Container>
   );

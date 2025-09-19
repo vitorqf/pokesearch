@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
 import "./globals.css";
+import { Registry } from "./registry";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +28,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-100 text-slate-800`}
       >
-        {children}
+        <header className="z-50 sticky top-0 py-4 border-b border-b-slate-200 bg-slate-50">
+          <div className="container mx-auto">
+            <Link href="/" className=" flex items-center gap-1">
+              <Image
+                src="/logo.svg"
+                alt="PokeSearch Logo"
+                width={40}
+                height={40}
+              />
+              <h1 className="text-2xl font-medium">
+                <strong className="text-red-500">Poké</strong>Search
+              </h1>
+            </Link>
+          </div>
+        </header>
+        <Registry>{children}</Registry>
       </body>
     </html>
   );

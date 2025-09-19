@@ -2,7 +2,8 @@
 
 import { Card } from "@/components/card";
 import { Search } from "@/components/search";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useDebounce } from "use-debounce";
@@ -12,6 +13,8 @@ interface Props {
 }
 
 export const Content = ({ pokemons }: Props) => {
+  const parentRef = useRef<HTMLDivElement>(null);
+
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebounce(search, 500);
   const [visiblePokemons, setVisiblePokemons] = useState<HandledPokemon[]>(
@@ -52,7 +55,7 @@ export const Content = ({ pokemons }: Props) => {
         pokemon.redirectTo.toString().includes(debouncedSearch),
     );
 
-    setVisiblePokemons(filtered.slice(0, 30));
+    setVisiblePokemons(filtered);
   }, [debouncedSearch, pokemons]);
 
   return (
@@ -72,16 +75,27 @@ export const Content = ({ pokemons }: Props) => {
       </div>
 
       <main className="container mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-        {visiblePokemons.map((pokemon, index) => (
-          <Card
-            key={pokemon.id}
-            id={pokemon.id}
-            redirectTo={pokemon.redirectTo}
-            name={pokemon.name}
-            image={pokemon.image}
-            ref={index === visiblePokemons.length - 1 ? ref : null}
-          />
-        ))}
+        <AnimatePresence mode="sync">
+          {visiblePokemons.map((pokemon, index) => (
+            <motion.div
+              key={pokemon.id}
+              layout
+              transition={{
+                layout: {
+                  duration: 0.2,
+                },
+              }}
+            >
+              <Card
+                id={pokemon.id}
+                redirectTo={pokemon.redirectTo}
+                name={pokemon.name}
+                image={pokemon.image}
+              />
+            </motion.div>
+          ))}
+          <div ref={ref} />
+        </AnimatePresence>
       </main>
     </>
   );

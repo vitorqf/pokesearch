@@ -1,8 +1,34 @@
 import { Cry } from "@/components/cry";
 import { InfoBox } from "@/components/info-box";
+import { MainImage } from "@/components/main-image";
 import { Stat } from "@/components/stat";
 import { Type } from "@/components/type";
 import { getPokemon } from "@/services/get-pokemon";
+import { getPokemons } from "@/services/get-pokemons";
+import capitalize from "capitalize";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<{
+  title: string;
+  description: string;
+}> {
+  const { id } = await params;
+  const pokemon = await getPokemon({ id });
+  return {
+    title: `PokéSearch - ${capitalize(pokemon.name)}`,
+    description: `View detailed information about ${capitalize(pokemon.name)}, including its stats, types, and cry.`,
+  };
+}
+
+export async function generateStaticParams() {
+  const pokemon = await getPokemons({});
+  return pokemon.results.map((pokemon) => ({
+    id: pokemon.redirectTo.toString(),
+  }));
+}
 
 export default async function PokemonPage({
   params,
@@ -14,24 +40,15 @@ export default async function PokemonPage({
 
   const paddedId = id.padStart(3, "0");
   const mainImage = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${paddedId}.png`;
+  const fallback = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${paddedId}.png`;
 
   return (
     <main className="py-10">
-      <div className="container mx-auto flex gap-8">
+      <div className="container mx-auto flex flex-col lg:flex-row gap-8">
         {/*Left Panel*/}
-        <div className="flex-1 h-screen max-h-[83vh] sticky top-[113px] flex flex-col gap-4 items-center justify-center">
+        <div className="flex-1 h-screen max-h-[83vh] lg:sticky top-[113px] flex flex-col gap-4 items-center justify-center">
           {/*Main Image*/}
-          <div className="group flex flex-col bg-slate-200 items-center justify-center w-full flex-2 h-full rounded-lg">
-            <img
-              width={300}
-              height={300}
-              className="group-hover:scale-125 transition duration-150"
-              src={
-                mainImage ?? "https://placehold.co/300x300/f87171/ffffff?text=?"
-              }
-              alt={pokemon.name}
-            />
-          </div>
+          <MainImage src={mainImage} fallback={fallback} alt={pokemon.name} />
 
           {/*Sprites*/}
           <div className="flex-1 flex gap-4 w-full items-center">

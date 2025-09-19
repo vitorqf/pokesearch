@@ -7,31 +7,41 @@ interface Params {
   offset?: number;
 }
 
-interface Response {
+interface ApiResponse {
   count: number;
   next?: string;
   previous?: string;
-  results: any;
+  results: PokemonSimple[];
+}
+
+interface HandledApiResponse {
+  count: number;
+  next?: string;
+  previous?: string;
+  results: HandledPokemon[];
 }
 
 const revalidate = 86400 * 7 * 4; // 1 month in seconds
 
-export const getPokemons = async ({ limit = 50, offset = 0 }: Params) => {
+export const getPokemons = async ({
+  limit = 10000,
+  offset = 0,
+}: Params): Promise<HandledApiResponse> => {
   const response = await api
-    .get<Response>("/pokemon-species", {
+    .get<ApiResponse>("/pokemon", {
       params: { limit, offset },
       next: { revalidate },
       cache: "force-cache",
     })
     .then((res) => res.data);
 
-  const images = response.results.map((pokemon: any) => {
+  const images = response.results.map((pokemon) => {
     const id = Number(pokemon.url.split("/").slice(-2, -1)[0]).toString();
 
     const paddedId = id.padStart(3, "0");
 
     return {
-      redirectTo: id,
+      redirectTo: Number(id),
       id: paddedId,
       image: `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${paddedId}.png`,
       name: pokemon.name,
